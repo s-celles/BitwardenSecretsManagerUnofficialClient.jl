@@ -63,6 +63,7 @@ download_info = get_download_info()
 # Create a temporary directory for the download
 download_dir = mktempdir()
 zip_path = joinpath(download_dir, "bws.zip")
+println("zip_path: $(zip_path)")
 
 # Download the zip file
 println("Downloading from $(download_info.url)")
@@ -71,12 +72,11 @@ Downloads.download(download_info.url, zip_path)
 # Extract the zip file
 println("Extracting to $(download_dir)")
 if Sys.iswindows()
-    run(
-        `powershell -Command "Expand-Archive -Path '$(zip_path)' -DestinationPath '$(download_dir)' -Force"`,
-    )
+    cmd = `powershell -Command "Expand-Archive -Path '$(zip_path)' -DestinationPath '$(download_dir)' -Force"`
 else
-    run(`unzip -o -q '$(zip_path)' -d '$(download_dir)'`)
+    cmd = `unzip -o -q $zip_path -d $download_dir`
 end
+run(cmd)
 
 # List files after extraction for debugging
 exe_files = readdir(download_dir)
@@ -187,4 +187,4 @@ else
     error("Failed to bind artifact! Verification returned nothing.")
 end
 
-println("Bitwarden Secret Manager CLI binary installed successfully.")
+println("Bitwarden Secrets Manager CLI binary installed successfully.")
