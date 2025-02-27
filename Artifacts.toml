@@ -1,0 +1,6 @@
+[bitwarden_sdk_sm]
+git-tree-sha1 = "6f845e204fe8fc58013deb171b4f07abbf36ea89"
+
+    [[bitwarden_sdk_sm.download]]
+    sha256 = "69b8d0fb2facc8cec4dd2b8157a3496ecaaa376ee1b0fd822012192ce7437505"
+    url = "https://github.com/bitwarden/sdk-sm/releases/download/bws-v1.0.0/bws-x86_64-pc-windows-msvc-1.0.0.zip"

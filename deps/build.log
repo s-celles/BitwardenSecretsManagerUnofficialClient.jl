@@ -1,0 +1,17 @@
+fichier trait��: C:\Users\scelles\.julia\artifacts\jl_GQBxq9\bws.exe
+1 fichiers correctement trait�s�; �chec du traitement de 0 fichiers
+fichier trait��: C:\Users\scelles\.julia\artifacts\jl_GQBxq9\bws.exe
+1 fichiers correctement trait�s�; �chec du traitement de 0 fichiers
+Building for platform: x86_64-windows
+Downloading from https://github.com/bitwarden/sdk-sm/releases/download/bws-v1.0.0/bws-x86_64-pc-windows-msvc-1.0.0.zip
+Extracting to C:\Users\scelles\AppData\Local\Temp\jl_eJU1Tj
+Files in download directory: ["bws.exe", "bws.zip"]
+Found executable at C:\Users\scelles\AppData\Local\Temp\jl_eJU1Tj\bws.exe
+Ensuring proper permissions for: C:\Users\scelles\.julia\artifacts\jl_GQBxq9\bws.exe
+Unblocking file with PowerShell: C:\Users\scelles\.julia\artifacts\jl_GQBxq9\bws.exe
+File unblocked successfully
+3. Setting explicit READ and EXECUTE permissions for user: scelles
+Binding artifact 6f845e204fe8fc58013deb171b4f07abbf36ea89 to bitwarden_sdk_sm in C:\Users\scelles\.julia\dev\BitwardenSecretsManagerUnofficialClient\deps\..\Artifacts.toml
+Artifact successfully bound and can be found
+Artifact directory: C:\Users\scelles\.julia\artifacts\6f845e204fe8fc58013deb171b4f07abbf36ea89
+Bitwarden Secret Manager CLI binary installed successfully.
