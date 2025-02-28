@@ -27,6 +27,15 @@ An unofficial Julia client for the Bitwarden Secrets Manager CLI.
 
 ## Installation
 
+Since this package is not yet registered in the Julia General Registry, you’ll need to install it directly from GitHub:
+
+```julia
+using Pkg
+Pkg.add(url="https://github.com/s-celles/BitwardenSecretsManagerUnofficialClient.jl")
+```
+
+(if/when registered)
+
 To install the package, use Julia's package manager:
 
 ```julia
