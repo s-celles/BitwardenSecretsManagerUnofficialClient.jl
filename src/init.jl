@@ -10,7 +10,7 @@ function __init__()
 
         artifact_hash = Pkg.Artifacts.artifact_hash(BWS_ARTIFACT_NAME, artifacts_toml)
         if artifact_hash === nothing
-            @warn "Bitwarden Secret Manager artifact not found. Run Pkg.build(\"BitwardenSecretsManagerUnofficialClient\") to install."
+            @warn "Bitwarden Secrets Manager artifact not found. Run Pkg.build(\"BitwardenSecretsManagerUnofficialClient\") to install."
             return
         end
 
@@ -30,11 +30,11 @@ function __init__()
             end
 
             if !found
-                @warn "Bitwarden Secret Manager executable not found in artifact directory. Run Pkg.build(\"BitwardenSecretsManagerUnofficialClient\") to reinstall."
+                @warn "Bitwarden Secrets Manager executable not found in artifact directory. Run Pkg.build(\"BitwardenSecretsManagerUnofficialClient\") to reinstall."
             end
         end
     catch e
-        @warn "Error checking Bitwarden Secret Manager installation: $e"
+        @warn "Error checking Bitwarden Secrets Manager installation: $e"
         @warn "You may need to run Pkg.build(\"BitwardenSecretsManagerUnofficialClient\") before using this package."
     end
 end

@@ -3,7 +3,7 @@ const BWS_ARTIFACT_NAME = "bitwarden_sdk_sm"
 """
     bws_path()
 
-Return the path to the Bitwarden Secret Manager CLI executable.
+Return the path to the Bitwarden Secrets Manager CLI executable.
 """
 function bws_path()
     # Get the path to our artifact
@@ -18,7 +18,7 @@ function bws_path()
 
     if artifact_hash === nothing
         error(
-            "Could not find the Bitwarden Secret Manager artifact. Please build the package with `Pkg.build(\"BitwardenSecretsManagerUnofficialClient\")`.",
+            "Could not find the Bitwarden Secrets Manager artifact. Please build the package with `Pkg.build(\"BitwardenSecretsManagerUnofficialClient\")`.",
         )
     end
 
@@ -45,7 +45,7 @@ end
 """
     run_bws(args...; kwargs...)
 
-Run the Bitwarden Secret Manager CLI with the given arguments.
+Run the Bitwarden Secrets Manager CLI with the given arguments.
 Returns the output as a string.
 
 Example:
