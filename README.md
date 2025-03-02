@@ -98,10 +98,10 @@ secrets_client = client |> secrets
 
 # Create secret
 create!(secrets_client, 
-    OrganizationID("org-uuid"), 
+    ProjectID("proj-uuid"), 
     "secret-key",
     "secret-value", 
-    "optional note")
+    note="optional note")
 
 # Get secret
 get(secrets_client, SecretID("secret-uuid"))

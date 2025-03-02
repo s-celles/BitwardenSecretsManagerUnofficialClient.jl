@@ -26,5 +26,5 @@ function run(client::BitwardenClient, request::AccessTokenLoginRequest)
     # What to do with the state file?
 
     #response = login_access_token(client.inner, request)
-    return -1
+    return true
 end

@@ -9,26 +9,40 @@
     @testset "create and delete" begin
         # Create a secret in a project
         project_id = ProjectID("57073045-0bd8-43e3-a0d5-b28c01194c7e")
-        response = client |> secrets |> sc -> create!(sc, "test_secret", "test_value", [project_id])
+        response = client |> secrets |> sc -> create!(sc, "test_secret", "test_value", [project_id], note="test_note")
         @test response isa ResponseForSecretResponse
         @test response.success
         @test response.data["value"] == "test_value"
+        @test response.data["note"] == "test_note"
 
         # Delete the secret
         secret_id = SecretID(response.data["id"])
         response = client |> secrets |> sc -> delete!(sc, secret_id)
         @test response isa ResponseForSecretsDeleteResponse
         @test response.success
-        @test response.data["value"] == 1
+        @test response.data["value"] == 1  # Number of secrets deleted
 
         # Create several secrets in a project and delete them
-        response1 = client |> secrets |> sc -> create!(sc, "test_secret1", "test_value1", project_id)
+        response1 = client |> secrets |> sc -> create!(sc, "test_secret1", "test_value1", project_id, note="test_note1")
+        @test response1 isa ResponseForSecretResponse
+        @test response1.success
+        @test response1.data["value"] == "test_value1"
+        @test response1.data["note"] == "test_note1"
+
         response2 = client |> secrets |> sc -> create!(sc, "test_secret2", "test_value2", project_id)
+        @test response2.success
+        @test response2.data["value"] == "test_value2"
+        @test response2.data["note"] == ""
+
         response3 = client |> secrets |> sc -> create!(sc, "test_secret3", "test_value3", project_id)
+        @test response3.success
+        @test response3.data["value"] == "test_value3"
+        @test response3.data["note"] == ""
+
         response = client |> secrets |> sc -> delete!(sc, [response1.data["id"], response2.data["id"], response3.data["id"]])
         @test response isa ResponseForSecretsDeleteResponse
         @test response.success
-        @test response.data["value"] == 3
+        @test response.data["value"] == 3  # Number of secrets deleted
     end
     
     @testset "create several secrets" begin

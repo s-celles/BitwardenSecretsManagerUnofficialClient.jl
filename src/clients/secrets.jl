@@ -31,9 +31,6 @@ function create!(
     organization_id::Union{OrganizationID,Nothing} = nothing,
     note::String = "",
 )
-    if note != ""
-        throw(ArgumentError("Note is not yet supported"))
-    end
     if organization_id !== nothing
         throw(ArgumentError("Organization ID is not yet supported"))
     end
@@ -54,8 +51,8 @@ function create!(
     )
     return ResponseForSecretResponse(result)
 end
-create!(secrets::SecretsClient, key::String, value::String, project_id::ProjectID) =
-    create!(secrets, key, value, [project_id])
+create!(secrets::SecretsClient, key::String, value::String, project_id::ProjectID; note::String="") =
+    create!(secrets, key, value, [project_id], note=note)
 
 
 function list(secrets::SecretsClient, project_id::ProjectID)
@@ -140,6 +137,10 @@ function run(client::BitwardenClient, request::SecretsCommand)
     if request.create !== nothing # Create a secret
         args = String["secret", "create"]
         args = _add_access_token(args, client)
+        if request.create.note != ""
+            push!(args, "--note")
+            push!(args, request.create.note)
+        end
         push!(args, request.create.key)
         push!(args, request.create.value)
         push!(args, string(request.create.project_ids[1]))
