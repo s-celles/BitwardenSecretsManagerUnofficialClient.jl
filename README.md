@@ -71,7 +71,8 @@ using BitwardenSecretsManagerUnofficialClient
 settings = ClientSettings(access_token="your_access_token")
 client = BitwardenClient(settings)
 
-# Or authenticate after creation
+# Or authenticate after client creation
+client = BitwardenClient()
 client |> auth |> login_access_token
 ```
 
@@ -84,23 +85,20 @@ using UUIDs
 # Create a client
 client = BitwardenClient()
 
-# List secrets
-client |> secrets |> sc -> list(sc, org_id)
-
-# List secrets in an organization
+# Define project ID and organization ID
 org_id = OrganizationID("your_organization_id")
-client |> secrets |> sc -> list(sc, org_id)
+project_id = ProjectID("proj-uuid")
 
-# Other secret operations
+# Get a secrets client to perform operations on secrets
 secrets_client = SecretsClient(client)
 # or
 secrets_client = client |> secrets
 
 # Create secret
 create!(secrets_client, 
-    ProjectID("proj-uuid"), 
     "secret-key",
     "secret-value", 
+    project_id, 
     note="optional note")
 
 # Get secret
@@ -108,11 +106,13 @@ get(secrets_client, SecretID("secret-uuid"))
 
 # Update secret
 update!(secrets_client,
-    OrganizationID("org-id"),
     SecretID("secret-id"),
-    "new-key",
-    "new-value",
-    "new note")
+    key="new-key",
+    value="new-value",
+    note="new note")
+
+# List secrets
+client |> secrets |> sc -> list(sc, project_id)
 
 # Delete secrets
 delete!(secrets_client, SecretID.(["secret-id-1", "secret-id-2"]))
