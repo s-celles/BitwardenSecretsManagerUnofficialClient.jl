@@ -32,9 +32,9 @@
         # it will need to be updated when the data changes (e.g. new projects are added with create)
     end
 
-    #@testset "delete" begin
-    #    project_id = ProjectID("071725e6-d85b-4a80-8ad2-b29400abe1a7")
-    #    response = client |> projects |> prj -> delete!(prj, project_id)
-    #    @test response.success
-    #end
+    # @testset "delete" begin
+    #     project_id = ProjectID("2a0b6cc7-e936-4d88-a044-b29400b02dea")
+    #     response = client |> projects |> prj -> delete!(prj, project_id)
+    #     @test response.success
+    # end
 end
