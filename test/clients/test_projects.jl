@@ -3,15 +3,26 @@
     client = BitwardenClient(settings)
     client |> auth |> login_access_token
 
-    #@testset "create" begin
+    # @testset "create" begin
     #    response = client |> projects |> prj -> create!(prj, "DummyProject")
-    #    println(response)
-    #end
+    # end
+
+    project_id = ProjectID("57073045-0bd8-43e3-a0d5-b28c01194c7e")
 
     @testset "get" begin
-        project_id = ProjectID("57073045-0bd8-43e3-a0d5-b28c01194c7e")
         response = client |> projects |> prj -> get(prj, project_id)
-        @test response.data["name"] == "Project 2"
+        @test response.data["name"] in ["Test proj 2", "Test project 2"]
+    end
+
+    @testset "update" begin
+        response = client |> projects |> prj -> get(prj, project_id)
+        if response.data["name"] == "Test proj 2"
+            response = client |> projects |> prj -> update!(prj, project_id, "Test project 2")
+            @test response.data["name"] == "Test project 2"
+        else
+            response = client |> projects |> prj -> update!(prj, project_id, "Test proj 2")
+            @test response.data["name"] == "Test proj 2"
+        end
     end
 
     @testset "list" begin
@@ -20,4 +31,10 @@
         # this test could be improved by checking the actual data
         # it will need to be updated when the data changes (e.g. new projects are added with create)
     end
+
+    #@testset "delete" begin
+    #    project_id = ProjectID("071725e6-d85b-4a80-8ad2-b29400abe1a7")
+    #    response = client |> projects |> prj -> delete!(prj, project_id)
+    #    @test response.success
+    #end
 end

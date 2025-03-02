@@ -103,12 +103,13 @@ ResponseForProjectsResponse(data::Vector) = ResponseForProjectsResponse(true, ""
 #    )
 #end
 
-
 struct ResponseForProjectsDeleteResponse
     success::Bool
     error_message::String
     data::Dict{String,Any}
 end
+ResponseForProjectsDeleteResponse(data) = ResponseForProjectsDeleteResponse(true, "", data)
+
 #function ResponseForProjectsDeleteResponse(dict::Dict)
 #    return ResponseForProjectsDeleteResponse(
 #        get(dict, "success", false),
