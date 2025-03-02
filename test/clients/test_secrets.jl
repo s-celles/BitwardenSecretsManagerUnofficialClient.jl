@@ -48,8 +48,8 @@
     @testset "create several secrets" begin
         project_id = ProjectID("57073045-0bd8-43e3-a0d5-b28c01194c7e")
         # Create 2 secrets
-        response1 = client |> secrets |> sc -> create!(sc, "aaa", "AAA", project_id)
-        response2 = client |> secrets |> sc -> create!(sc, "bbb", "BBB", project_id)
+        response1 = client |> secrets |> sc -> create!(sc, "aaa", "AAA", project_id; note="a AAA note")
+        response2 = client |> secrets |> sc -> create!(sc, "bbb", "BBB", project_id; note="a BBB note")
 
         @testset "get one" begin
             secret_id = response1.data["id"]  # String
