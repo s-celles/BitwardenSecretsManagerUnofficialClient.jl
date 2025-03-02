@@ -69,24 +69,23 @@
             @test response.data["value"] == "BBB"
         end
 
-        #@testset "update" begin
-        #    secret_id = SecretID(response2.data["id"])
-        #    response = client |> secrets |> sc -> update!(sc, secret_id,
-        #        key = "b_b",
-        #        value = "B_B",
-        #        note = "b note",
-        #        organization_id = org_id,
-        #        project_id = project_id,
-        #    )
-        #    @test response isa ResponseForSecretResponse
-        #    @test response.success
-        #    response = client |> secrets |> sc -> get(sc, secret_id)
-        #    # Secret should be updated
-        #    println(response)
-        #    @test response.data["key"] == "b_b"
-        #    @test response.data["value"] == "B_B"
-        #    @test response.data["note"] == "b note"
-        #end
+        @testset "update" begin
+            secret_id = SecretID(response2.data["id"])
+            response = client |> secrets |> sc -> update!(sc, secret_id,
+                key = "b_b",
+                value = "B_B",
+                note = "b note",
+                organization_id = org_id,
+                project_id = project_id,
+            )
+            @test response isa ResponseForSecretResponse
+            @test response.success
+            response = client |> secrets |> sc -> get(sc, secret_id)
+            # Secret should be updated
+            @test response.data["key"] == "b_b"
+            @test response.data["value"] == "B_B"
+            @test response.data["note"] == "b note"
+        end
 
         @testset "get several" begin
             secret_ids = SecretID.([
@@ -98,7 +97,7 @@
             @test response.success
             @test length(response.data) >= 2
             @test response.data[1]["value"] == "AAA"
-            @test response.data[2]["value"] == "BBB"
+            @test response.data[2]["value"] == "B_B"
 
             # should also work with strings (UUIDs)
             secret_ids = [
@@ -110,7 +109,7 @@
             @test response.success
             @test length(response.data) >= 2
             @test response.data[1]["value"] == "AAA"
-            @test response.data[2]["value"] == "BBB"
+            @test response.data[2]["value"] == "B_B"
         end
 
         @testset "list" begin
@@ -119,7 +118,7 @@
             response = client |> secrets |> sc -> list(sc, project_id)
             @test length(response.data) > 0
             @test response.data[1]["value"] == "AAA"
-            @test response.data[2]["value"] == "BBB"
+            @test response.data[2]["value"] == "B_B"
 
             @testset "delete several" begin
                 ids = [data["id"] for data in response.data]

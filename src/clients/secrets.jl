@@ -86,8 +86,8 @@ function update!(
                     string(id.id),
                     key,
                     note,
-                    value,
                     string(organization_id.id.value),
+                    value,
                     project_id !== nothing ? [project_id.id] : nothing,
                 ),
             ),
@@ -164,8 +164,8 @@ function run(client::BitwardenClient, request::SecretsCommand)
         end
         return responses
     elseif request.update !== nothing  # Update a secret
-        throw(ArgumentError("Update a secret not (yet) implemented"))
-        args = String["secret", "edit", string(request.update.id)]
+        # throw(ArgumentError("Update a secret not (yet) implemented"))
+        args = String["secret", "edit"]
         args = _add_access_token(args, client)
         if request.update.key !== nothing
             push!(args, "--key")
@@ -187,6 +187,7 @@ function run(client::BitwardenClient, request::SecretsCommand)
             push!(args, "--project-id")
             push!(args, string(request.update.project_ids[1]))
         end
+        push!(args, string(request.update.id))
         response = run(client.inner, args)
         response = JSON.parse(response)
         return response
