@@ -1,5 +1,6 @@
 # BitwardenSecretsManagerUnofficialClient
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/s-celles/BitwardenSecretsManagerUnofficialClient.jl)
 [![Build Status](https://github.com/s-celles/BitwardenSecretsManagerUnofficialClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/s-celles/BitwardenSecretsManagerUnofficialClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
 An unofficial Julia client for the Bitwarden Secrets Manager CLI.
